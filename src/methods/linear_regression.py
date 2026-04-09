@@ -28,19 +28,13 @@ class LinearRegression(object):
         """
         X = training_data
         y = training_labels
-
-        # Add bias term (column of 1s)
-        N = X.shape[0]
-        X = np.c_[np.ones(N), X]
-
-        # Closed-form solution
+        
         XtX = X.T @ X
-        XtX_inv = np.linalg.pinv(XtX)   # safer than inv
+        XtX_inv = np.linalg.pinv(XtX)   
         Xt_y = X.T @ y
 
         self.w = XtX_inv @ Xt_y
 
-        # Return predictions on training data
         pred_labels = X @ self.w
         return pred_labels
 
@@ -54,10 +48,6 @@ class LinearRegression(object):
             pred_labels (np.array): labels of shape (N,)
         """
         X = test_data
-
-        # Add bias term
-        N = X.shape[0]
-        X = np.c_[np.ones(N), X]
 
         pred_labels = X @ self.w
         return pred_labels
