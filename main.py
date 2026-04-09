@@ -38,10 +38,27 @@ def main(args):
 
     # Make a validation set (it can overwrite xtest, ytest)
     if not args.test:
-        ### WRITE YOUR CODE HERE
-        pass
+        n_train = int(0.8 * len(train_features))
 
-    ### WRITE YOUR CODE HERE to do any other data processing
+        x_train_full = train_features
+        y_train_reg_full = train_labels_reg
+
+        train_features = x_train_full[:n_train]
+        test_features = x_train_full[n_train:]
+
+        train_labels_reg = y_train_reg_full[:n_train]
+        test_labels_reg = y_train_reg_full[n_train:]
+        
+
+    # Normalize features using training statistics only
+    means = np.mean(train_features, axis=0, keepdims=True)
+    stds = np.std(train_features, axis=0, keepdims=True)
+    stds[stds == 0] = 1
+
+    train_features = normalize_fn(train_features, means, stds)
+    test_features = normalize_fn(test_features, means, stds)
+    train_features = append_bias_term(train_features)
+    test_features = append_bias_term(test_features)
 
     ## 3. Initialize the method you want to use.
 
@@ -58,8 +75,8 @@ def main(args):
         pass
 
     elif args.method == "linear_regression":
-        ### WRITE YOUR CODE HERE
-        pass
+        method_obj = LinearRegression()
+        
 
     else:
         raise ValueError(f"Unknown method: {args.method}")
