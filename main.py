@@ -41,7 +41,15 @@ def main(args):
         ### WRITE YOUR CODE HERE
         pass
 
-    ### WRITE YOUR CODE HERE to do any other data processing
+    means = np.mean(train_features, axis=0)
+    stds = np.std(train_features, axis=0)
+    
+    # Empêcher la division par zéro si un écart-type est nul
+    stds[stds == 0] = 1
+
+    # 2. Appliquer la normalisation aux deux jeux de données
+    train_features = normalize_fn(train_features, means, stds)
+    test_features = normalize_fn(test_features, means, stds)
 
     ## 3. Initialize the method you want to use.
 
