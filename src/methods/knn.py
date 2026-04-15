@@ -32,7 +32,7 @@ class KNN(object):
         self.datatrain= training_data
         self.labelstrain= training_labels
 
-        pred_labels= predict(self, training_data)
+        pred_labels= self.predict(training_data)
         
         return pred_labels
 
@@ -41,9 +41,9 @@ class KNN(object):
         test_labels = np.zeros(points_nbr)
 
         for i in range(points_nbr):
-            distances = np.linalg.norm(self.training_data - test_data[i], axis=1)
+            distances = np.linalg.norm(self.datatrain - test_data[i], axis=1)
             k_indices = np.argsort(distances)[:self.k]
-            k_nearest_labels = self.training_labels[k_indices]
+            k_nearest_labels = self.labelstrain[k_indices]
 
             
             if self.task_kind == "classification":
