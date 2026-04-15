@@ -29,11 +29,11 @@ class KNN(object):
             pred_labels (np.array): labels of shape (N,)
         """
 
-        ##
-        ###
-        #### YOUR CODE HERE!
-        ###
-        ##
+        self.datatrain= training_data
+        self.labelstrain= training_labels
+
+        pred_labels= predict(self, training_data)
+        
         return pred_labels
 
     def predict(self, test_data):
