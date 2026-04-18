@@ -29,25 +29,28 @@ class KNN(object):
             pred_labels (np.array): labels of shape (N,)
         """
 
-        ##
-        ###
-        #### YOUR CODE HERE!
-        ###
-        ##
+        self.datatrain= training_data
+        self.labelstrain= training_labels
+
+        pred_labels= self.predict(training_data)
+        
         return pred_labels
 
     def predict(self, test_data):
-        """
-        Runs prediction on the test data.
+        points_nbr = test_data.shape[0]
+        test_labels = np.zeros(points_nbr)
 
-        Arguments:
-            test_data (np.array): test data of shape (N,D)
-        Returns:
-            test_labels (np.array): labels of shape (N,)
-        """
-        ##
-        ###
-        #### YOUR CODE HERE!
-        ###
-        ##
+        for i in range(points_nbr):
+            distances = np.linalg.norm(self.datatrain - test_data[i], axis=1)
+            k_indices = np.argsort(distances)[:self.k]
+            k_nearest_labels = self.labelstrain[k_indices]
+
+            
+            if self.task_kind == "classification":
+                counts = np.bincount(k_nearest_labels.astype(int))
+                test_labels[i] = np.argmax(counts)
+            
+            elif self.task_kind == "regression":
+                test_labels[i] = np.mean(k_nearest_labels)
+
         return test_labels

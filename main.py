@@ -67,7 +67,7 @@ def main(args):
         method_obj = DummyClassifier(arg1=1, arg2=2)
 
     elif args.method == "knn":
-        ### WRITE YOUR CODE HERE
+        method_obj = KNN(k=args.K, task_kind=args.task)
         pass
 
     elif args.method == "logistic_regression":
