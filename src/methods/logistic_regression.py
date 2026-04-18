@@ -30,8 +30,7 @@ class LogisticRegression(object):
         Returns:
             pred_labels (np.array): target of shape (N,)
         """
-        ##
-        ###
+   
         N, D = training_data.shape
         C = get_n_classes(training_labels)
 
@@ -57,8 +56,6 @@ class LogisticRegression(object):
         pred_onehot[np.arange(N), np.argmax(probs, axis=1)] = 1
         pred_labels = onehot_to_label(pred_onehot)
 
-        ###
-        ##
         return pred_labels
 
     def predict(self, test_data):
@@ -70,9 +67,6 @@ class LogisticRegression(object):
         Returns:
             pred_labels (np.array): labels of shape (N,)
         """
-        ##
-        ###
-        #### WRITE YOUR CODE HERE!
         N = test_data.shape[0]
         scores = test_data @ self.weights
         scores = scores - np.max(scores, axis=1, keepdims=True)
@@ -83,6 +77,4 @@ class LogisticRegression(object):
         pred_onehot[np.arange(N), np.argmax(probs, axis=1)] = 1
         pred_labels = onehot_to_label(pred_onehot)
 
-        ###
-        ##
         return pred_labels
