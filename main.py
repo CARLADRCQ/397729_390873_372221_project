@@ -75,8 +75,6 @@ def main(args):
         pass
 
     elif args.method == "logistic_regression":
-        train_features = append_bias_term(train_features)
-        test_features = append_bias_term(test_features)
         method_obj = LogisticRegression(lr=args.lr, max_iters=args.max_iters)
 
     elif args.method == "linear_regression":
