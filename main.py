@@ -61,7 +61,7 @@ def main(args):
     train_features = normalize_fn(train_features, means, stds)
     test_features = normalize_fn(test_features, means, stds)
 
-    if args.method == "logistic_regression":
+    if args.method in ("logistic_regression", "linear_regression"):
         train_features = append_bias_term(train_features)
         test_features = append_bias_term(test_features)
     ## 3. Initialize the method you want to use.
