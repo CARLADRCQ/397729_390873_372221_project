@@ -1,5 +1,6 @@
 import argparse
 import numpy as np
+import time
 
 from src.methods.dummy_methods import DummyClassifier
 from src.methods.logistic_regression import LogisticRegression
