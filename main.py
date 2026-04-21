@@ -94,11 +94,13 @@ def main(args):
         train_start = time.time()
         preds_train = method_obj.fit(train_features, train_labels_classif)
         train_end = time.time()
+        train_time = train_end-train_start
 
         # Predict on unseen data
         predict_start = time.time()
         preds = method_obj.predict(test_features)
         predict_end = time.time()
+        predict_time = predict_end-predict_start
 
         # Report runtime analysis
         print(f"Training time = {train_time:.3f}s")
