@@ -80,6 +80,7 @@ def main(args):
     elif args.method == "linear_regression":
         method_obj = LinearRegression()
         
+        
 
     else:
         raise ValueError(f"Unknown method: {args.method}")
@@ -89,10 +90,18 @@ def main(args):
     if args.task == "classification":
         assert args.method != "linear_regression", f"You should use linear regression as a regression method"
         # Fit the method on training data
+        train_start = time.time()
         preds_train = method_obj.fit(train_features, train_labels_classif)
+        train_end = time.time()
 
         # Predict on unseen data
+        predict_start = time.time()
         preds = method_obj.predict(test_features)
+        predict_end = time.time()
+
+        # Report runtime analysis
+        print(f"Training time = {train_time:.3f}s")
+        print(f"Predicting time = {predict_time:.3f}s")
 
         # Report results: performance on train and valid/test sets
         acc = accuracy_fn(preds_train, train_labels_classif)
@@ -106,10 +115,20 @@ def main(args):
     elif args.task == "regression":
         assert args.method != "logistic_regression", f"You should use logistic regression as a classification method"
         # Fit the method on training data
+        train_start = time.time()
         preds_train = method_obj.fit(train_features, train_labels_reg)
+        train_end = time.time()
+        train_time = train_end-train_start
 
         # Predict on unseen data
+        predict_start = time.time()
         preds = method_obj.predict(test_features)
+        predict_end = time.time()
+        predict_time = predict_end-predict_start
+
+        # Report runtime analysis
+        print(f"Training time = {train_time:.3f}s")
+        print(f"Predicting time = {predict_time:.3f}s")
 
         # Report results: MSE on train and valid/test sets
         train_mse = mse_fn(preds_train, train_labels_reg)
